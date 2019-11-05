@@ -1,0 +1,354 @@
+html {
+    background: #f6f6f6;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+}
+
+article,aside,blockquote,body,button,code,dd,details,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul {
+    margin: 0;
+    padding: 0;
+    color: #666
+}
+
+body,html {
+    height: 100%
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    display: block
+}
+
+audio,canvas,video {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    *display: inline;
+    *zoom:1}
+
+/* body,button,input,select,textarea {
+    font: 12px/1.5 Lantinghei SC,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,Helvetica Neue,Helvetica,Arial,sans-serif
+} */
+body {
+    font-family: "Microsoft YaHei";
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    /* /文本不能被选择/  */
+}
+
+input,select,textarea {
+    font-size: 100%;
+    border: 0;
+    outline: none;
+    -webkit-appearance: none
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+th {
+    text-align: inherit
+}
+
+fieldset,img {
+    border: 0
+}
+
+iframe {
+    display: block
+}
+
+abbr,acronym {
+    border: 0;
+    font-variant: normal
+}
+
+del {
+    text-decoration: line-through
+}
+
+address,caption,cite,code,dfn,em,th,var {
+    font-style: normal;
+    font-weight: 500
+}
+
+ol,ul {
+    list-style: none
+}
+
+caption,th {
+    text-align: left
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: 500
+}
+
+q:after,q:before {
+    content: ""
+}
+
+sub,sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+}
+
+sup {
+    top: -.5em
+}
+
+sub {
+    bottom: -.25em
+}
+
+.fot-ct {
+    color: red
+}
+
+a,a:active,a:hover,a:link,a:visited {
+    outline: none
+}
+
+a,ins {
+    text-decoration: none
+}
+
+a {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    border-radius: 0
+}
+
+code,kbd,pre,samp {
+    font-family: monospace,serif;
+    font-size: 1em
+}
+
+.clearfix:after,.clr:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0
+}
+
+img {
+    display: block;
+    border: 0
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clearfix,.clr {
+    zoom:1}
+
+* {
+    box-sizing: border-box;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.color {
+    color: #ad1a1a;
+}
+
+.hide {
+    display: none;
+}
+
+.text-overflow {
+    white-space: nowrap;
+}
+
+.text-overflow,.text-overflows {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-overflows {
+    display: -webkit-box;
+    -webkit-line-clamp: 3
+}
+
+button {
+    border: 0;
+    background-color: none;
+    outline: none;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.ab {
+    position: absolute;
+}
+
+.re {
+    position: relative;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+/* 隐藏滚动条  start  by ytj */
+/*webkit内核*/
+.scroll_content::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+.scroll_content::-webkit-scrollbar-button {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-webkit-scrollbar-track-piece {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-webkit-scrollbar-corner {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-webkit-scrollbar-resizer {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/*o内核*/
+.scroll_content .-o-scrollbar {
+    -moz-appearance: none !important;
+    background: rgba(0, 255, 0, 0) !important;
+}
+
+.scroll_content::-o-scrollbar-button {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-o-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-o-scrollbar-track-piece {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-o-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-o-scrollbar-corner {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll_content::-o-scrollbar-resizer {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/*IE10,IE11,IE12*/
+.scroll_content {
+    -ms-scroll-chaining: chained;
+    -ms-overflow-style: none;
+    -ms-content-zooming: zoom;
+    -ms-scroll-rails: none;
+    -ms-content-zoom-limit-min: 100%;
+    -ms-content-zoom-limit-max: 500%;
+    -ms-scroll-snap-type: proximity;
+    -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
+    -ms-overflow-style: none;
+    overflow: auto;
+}
+/* 隐藏滚动条  start  by ytj */
+
+/* 取消元素的点击事件 */
+.not-event{
+    pointer-events: none;
+}
+.disclaimer-main.mobile>p{
+    margin: 1rem 0.7rem;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: left;
+    
+}
+.disclaimer-main.mobile-landscape>p {
+    margin: 1rem 0.7rem;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: left;
+}
+.disclaimer-main.pc>p {
+    margin: 0.2rem 0.07rem;
+    font-size: 0.14rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: left;
+}
+
+
+/* // 单行显示，多行显示   start by ytj */
+
+/* // 只显示一行超出缺省 */
+.only-line1 {
+    word-break: keep-all;
+    /* 不换行 */
+    overflow: hidden;
+    /* //文本溢出显示省略号 */
+    text-overflow: ellipsis; 
+    /* //文本不会换行（单行文本溢出） */
+    white-space: nowrap; 
+}
+
+/* // 只显示两行 超出缺省 */
+.only-line2 {
+    overflow: hidden;
+    /* //文本溢出显示省略号 */
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* // 只显示三行超出缺省 */
+.only-line3 {
+    overflow: hidden;
+    /* //文本溢出显示省略号 */
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* // 单行显示，多行显示   start by ytj */

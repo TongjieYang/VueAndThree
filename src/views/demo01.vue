@@ -34,9 +34,10 @@ export default {
     // HelloWorld
   },
   created: function(){
-
+    document.title = 'demo01-第一个3D场景';
   },
   mounted: function(){
+    
     this.init();
     this.animate();
   },

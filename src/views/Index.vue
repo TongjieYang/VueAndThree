@@ -1,7 +1,8 @@
 <template>
   <div class="router-link-container">
     <!-- 1部分  快速入门 -->
-    <router-link to="/unit1" class="router-link">unit1</router-link>
+    <router-link to="/demo01" class="router-link">demo01---第一个3d场景</router-link>
+    <router-link to="/demo02" class="router-link">demo02---setInterval调用render方法</router-link>
   </div>
 </template>
 

@@ -7,8 +7,10 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 import * as Three from "three";
-import { OrbitControls } from "three-orbit-controls";
+// import { OrbitControls } from "three-orbit-controls";
+
 import { BoxGeometry, BoxBufferGeometry } from "three";
+import  'three-orbitcontrols'
 
 // import {
 //   Scene,
@@ -56,8 +58,14 @@ export default {
         // 点光源
         let point = new Three.PointLight(0xffffff);
         point.position.set(400,200,300); //点光源位置
+        console.log(point);
         // 点光源添加到场景中
         this.scene.add(point);
+
+
+        let sphereSize = 50;
+        let pointLightHelper = new Three.PointLightHelper( point, sphereSize );
+        this.scene.add( pointLightHelper );
 
         // 环境光
         let ambient = new Three.AmbientLight(0x444444);
@@ -72,7 +80,9 @@ export default {
         let s = 200;  //三维显示范围控制系数 ,系数越大,显示的范围越大,  (视图上系数越大,三维模型显示越小)
 
         this.camera = new Three.OrthographicCamera(-s*k,s*k,-s,s,1,1000);
-        this.scene.add(this.camera);
+        this.camera.position.set(200,300,200);
+        this.camera.lookAt(this.scene.position);
+        // this.scene.add(this.camera);
 
 
         // 创建渲染器对象
@@ -80,14 +90,41 @@ export default {
         this.renderer.setSize(width,height); //设置渲染尺寸大小
         this.renderer.setClearColor(0xb9d3ff,1);  //设置背景颜色
 
-
+        console.log(this.scene);
         canvasContainer.appendChild(this.renderer.domElement); //body元素中插入canvas对象
+
+        
+
+        // 框架1  start
+        // let render = function render(){
+        //     that.renderer.render(that.scene,that.camera);
+        //     // that.mesh.rotateY(0.01);
+        //     requestAnimationFrame(render);
+        // }
+        // render();
+        // //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
+        // let controls = new Three.OrbitControls(this.camera,this.renderer.domElement);
+        // console.log(controls);
+        // 框架1  end
+
+
+        // 框架2  start
         let that = this;
         let render = function render(){
             that.renderer.render(that.scene,that.camera);
-            that.mesh.rotateY(0.01);
+            // that.mesh.rotateY(0.01);
+            // requestAnimationFrame(render);
         }
-        setInterval(render,20)
+        render();
+        //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
+        let controls = new Three.OrbitControls(this.camera,this.renderer.domElement);
+        console.log(controls);
+        //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
+        controls.addEventListener('change', render);
+        // 框架  end
+
+
+        
       },
     //   animate: function(){
     //       this.renderer.render(this.scene,this.camera);
@@ -100,6 +137,7 @@ export default {
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
       this.init();
+      // console.log(OrbitControls);
     //   this.animate();
   },
   beforeCreate() {}, //生命周期 - 创建之前

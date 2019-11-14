@@ -26,6 +26,25 @@ export default new Router({
       name: 'demo02',
       component: () => import( /* webpackChunkName: "about" */ './views/demo02.vue')
     },
-    
+    {
+      path: '/demo03',
+      name: 'demo03',
+      component: () => import( /* webpackChunkName: "about" */ './views/demo03.vue')
+    },
+    {
+      path: '/demo04',
+      name: 'demo04',
+      component: () => import( /* webpackChunkName: "about" */ './views/demo04.vue')
+    },
+    {
+      path: '/demo05',
+      name: 'demo05',
+      component: () => import( /* webpackChunkName: "about" */ './views/demo05.vue')
+    },
+    {
+      path: '/demo06',
+      name: 'demo06',
+      component: () => import( /* webpackChunkName: "about" */ './views/demo06.vue')
+    },
   ]
 })

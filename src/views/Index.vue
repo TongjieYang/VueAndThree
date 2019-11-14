@@ -3,6 +3,10 @@
     <!-- 1部分  快速入门 -->
     <router-link to="/demo01" class="router-link">demo01---第一个3d场景</router-link>
     <router-link to="/demo02" class="router-link">demo02---setInterval调用render方法</router-link>
+    <router-link to="/demo03" class="router-link">demo03---插入几何体，并偏移</router-link>
+    <router-link to="/demo04" class="router-link">demo04---创建材质对象</router-link>
+    <router-link to="/demo05" class="router-link">demo05---顶点位置渲染</router-link>
+    <router-link to="/demo05" class="router-link">demo06---顶点法向量光照计算</router-link>
   </div>
 </template>
 

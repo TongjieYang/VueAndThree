@@ -9,7 +9,7 @@
 import * as Three from "three";
 // import { OrbitControls } from "three-orbit-controls";
 
-import { BoxGeometry, BoxBufferGeometry, DoubleSide } from "three";
+// import { BoxGeometry, BoxBufferGeometry, DoubleSide } from "three";
 import  'three-orbitcontrols'
 
 // import {
@@ -23,6 +23,7 @@ import  'three-orbitcontrols'
 
 export default {
   //import引入的组件需要注入到对象中才能使用
+  name: 'demo06',
   components: {},
   data() {
     //这里存放数据
@@ -97,7 +98,7 @@ export default {
             color: 0x0099ff,
             // vertexColors: Three.VertexColors,
             // side:  Three.DoubleSide
-            side: Three.side
+            side: Three.FrontSide
         });
 
         let material2 = new Three.LineBasicMaterial({

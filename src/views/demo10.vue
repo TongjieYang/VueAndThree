@@ -7,9 +7,9 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 import * as Three from "three";
-// import { OrbitControls } from "three-orbit-controls";
+// import { OrbitControls } from "Three-orbit-controls";
 
-// import { BoxGeometry, BoxBufferGeometry } from "three";
+// import { BoxGeometry, BoxBufferGeometry, DoubleSide } from "Three";
 import  'three-orbitcontrols'
 
 // import {
@@ -19,11 +19,11 @@ import  'three-orbitcontrols'
 //   BoxGeometry,
 //   MeshBasicMaterial,
 //   Mesh
-// } from 'three';
+// } from 'Three';
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  name: 'demo04',
+  name: 'demo10',
   components: {},
   data() {
     //这里存放数据
@@ -41,51 +41,44 @@ export default {
   //方法集合
   methods: {
       init: function(){
-          let canvasContainer = document.getElementById('canvas-container2');
+        let canvasContainer = document.getElementById('canvas-container2');
         //   创建场景
-          this.scene = new Three.Scene();
-        //   创建geometry
-          let geometry = new Three.BoxBufferGeometry(100,100,100);
-        // 正八面体
-        // let geometry = new Three.OctahedronGeometry(50);
-        //   创建material
-        // geometry.scale(1,2,1);
-        // let material = new Three.MeshBasicMaterial({
-        //     color: 0x0099ff,
-        //     wireframe: true
+        this.scene = new Three.Scene();
+        /**
+         * 创建网格模型
+         */
+        var geometry = new Three.Geometry(); //声明一个几何体对象Geometry
+
+        var p1 = new Three.Vector3(50, 0, 0); //顶点1坐标
+        var p2 = new Three.Vector3(0, 70, 0); //顶点2坐标
+        var p3 = new Three.Vector3(80, 70, 0); //顶点3坐标
+        //顶点坐标添加到geometry对象
+        geometry.vertices.push(p1, p2, p3);
+        // Color对象表示顶点颜色数据
+        var color1 = new Three.Color(0x00ff00); //顶点1颜色——绿色
+        var color2 = new Three.Color(0xff0000); //顶点2颜色——红色
+        var color3 = new Three.Color(0x0000ff); //顶点3颜色——蓝色
+        //顶点颜色数据添加到geometry对象
+        geometry.colors.push(color1, color2, color3);
+        // //材质对象
+        // var material = new Three.LineBasicMaterial({
+        //     // color: 0xffff00
+        //     vertexColors: Three.VertexColors, //以顶点颜色为准
         // });
-        // 与光照计算  高光效果（镜面反射）    产生棱角感
-        var material = new Three.MeshPhongMaterial({
-          color: 0xff0000,
-          specular:0x444444,
-          shininess:30,
-        });
-        //   let material = new Three.MeshLambertMaterial({
-        //       color: 0x0099ff,
-        //       wireframe: true
-        //   });
-
-          let sphereGeometry = new Three.SphereBufferGeometry(60,80,80);
-          let sphereMaterial = new Three.MeshLambertMaterial({
-              color: 0x99ffff
-          });
+        // //线条模型对象
+        // var line = new Three.Line(geometry, material);
+        // this.scene.add(line); //线条对象添加到场景中
 
 
-          let cylinderGeometry = new Three.CylinderBufferGeometry(50,50,80,10);
-          let cylinderMaterial = new Three.MeshLambertMaterial({
-              color: 0x99ffff
-          });
-        //    创建网格对象
-        this.mesh = new Three.Mesh(geometry,material);
-        // this.mesh.scale(1,2,1);
-        this.sphereMesh = new Three.Mesh(sphereGeometry,sphereMaterial);
-        this.cylinderMesh = new Three.Mesh(cylinderGeometry,cylinderMaterial);
-        // this.sphereMesh.translateX(110);
-        this.sphereMesh.position.set(110,0,0);
-        this.cylinderMesh.position.set(0,130,0);
-        this.scene.add(this.mesh);
-        // this.scene.add(this.sphereMesh);
-        // this.scene.add(this.cylinderMesh);
+        // 点渲染模式
+        var material = new Three.PointsMaterial({
+            // 使用顶点颜色数据渲染模型，不需要再定义color属性
+            // color: 0xff0000,
+            vertexColors: Three.VertexColors, //以顶点颜色为准
+            size: 10.0 //点对象像素尺寸
+        }); //材质对象
+        var points = new Three.Points(geometry, material); //点模型对象
+        this.scene.add(points); //点对象添加到场景中
 
         // 光源设置
         // 点光源
@@ -105,12 +98,15 @@ export default {
         // 环境光添加到场景中
         this.scene.add(ambient);
 
+        //坐标轴对象模拟   红色：x轴  绿色： Y轴  蓝： z轴
+        let axesHelper = new Three.AxesHelper( 200 );
+        this.scene.add( axesHelper );
 
         // 相机设置
         let width = window.innerWidth;
         let height = window.innerHeight;
         let k = width/height; //宽高比
-        let s = 200;  //三维显示范围控制系数 ,系数越大,显示的范围越大,  (视图上系数越大,三维模型显示越小)
+        let s = 150;  //三维显示范围控制系数 ,系数越大,显示的范围越大,  (视图上系数越大,三维模型显示越小)
 
         this.camera = new Three.OrthographicCamera(-s*k,s*k,-s,s,1,1000);
         this.camera.position.set(200,300,200);
@@ -165,7 +161,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "demo03---创建材质对象";
+    document.title = "demo08---顶点索引，法向量";
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {

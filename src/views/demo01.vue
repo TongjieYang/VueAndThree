@@ -8,7 +8,7 @@
 // @ is an alias to /src
 import * as Three from 'three'; 
 import {OrbitControls} from 'three-orbit-controls';
-import { BoxGeometry, BoxBufferGeometry } from 'three';
+// import { BoxGeometry, BoxBufferGeometry } from 'three';
 
 
 // import {
@@ -21,7 +21,7 @@ import { BoxGeometry, BoxBufferGeometry } from 'three';
 // } from 'three';
 
 export default {
-  name: 'unit1',
+  name: 'demo01',
   data() {
     return {
       scene: null,

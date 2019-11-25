@@ -55,9 +55,17 @@ export default {
         //顶点坐标添加到geometry对象
         geometry.vertices.push(p1, p2, p3);
 
+
+        var color1 = new Three.Color(0x00ff00); //顶点1坐标
+        var color2 = new Three.Color(0xff0000); //顶点2坐标
+        var color3 = new Three.Color(0x0000ff); //顶点3坐标
+        //顶点坐标添加到geometry对象
+        geometry.colors.push(color1, color2, color3);
+
         //材质对象
         var material = new Three.LineBasicMaterial({
-        color: 0xffff00
+        // color: 0xffff00
+          color: Three.VertexColors
         });
         //线条模型对象
         var line = new Three.Line(geometry, material);
@@ -141,7 +149,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "demo08---定义顶点数据";
+    document.title = "demo08---定义顶点颜色数据";
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {

@@ -8,7 +8,7 @@
     <router-link to="/demo05" class="router-link">demo05---顶点位置渲染</router-link>
     <router-link to="/demo06" class="router-link">demo06---顶点法向量光照计算</router-link>
     <router-link to="/demo07" class="router-link">demo07---矩形非索引绘制</router-link>
-    <router-link to="/demo08" class="router-link">demo08---矩形索引绘制</router-link>
+    <router-link to="/demo08" class="router-link">demo08---定义顶点颜色数据</router-link>
     <router-link to="/demo09" class="router-link">demo09---定义顶点颜色数据</router-link>
     <router-link to="/demo10" class="router-link">demo10---顶点索引法向量</router-link>
   </div>

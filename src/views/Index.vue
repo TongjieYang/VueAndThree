@@ -11,6 +11,16 @@
     <router-link to="/demo08" class="router-link">demo08---定义顶点颜色数据</router-link>
     <router-link to="/demo09" class="router-link">demo09---定义顶点颜色数据</router-link>
     <router-link to="/demo10" class="router-link">demo10---顶点索引法向量</router-link>
+    <router-link to="/demo11" class="router-link">demo11---材质</router-link>
+    <router-link to="/demo12" class="router-link">demo12---网格材质</router-link>
+    <router-link to="/demo13" class="router-link">demo13---线材质</router-link>
+    <router-link to="/demo14" class="router-link">demo14---材质属性</router-link>
+    <router-link to="/demo15" class="router-link">demo15---点线网格模型</router-link>
+    <router-link to="/demo16" class="router-link">demo16---旋转平移缩放</router-link>
+    <router-link to="/demo17" class="router-link">demo17---模型对象克隆</router-link>
+    <router-link to="/demo18" class="router-link">demo18---聚光光源，方向光</router-link>
+    <router-link to="/demo19" class="router-link">demo19---平行光阴影</router-link>
+    <router-link to="/demo20" class="router-link">demo20---组，对象group,层级模型</router-link>
   </div>
 </template>
 

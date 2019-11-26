@@ -23,7 +23,7 @@ import  'three-orbitcontrols'
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  name: 'demo10',
+  name: 'demo16',
   components: {},
   data() {
     //这里存放数据
@@ -47,54 +47,54 @@ export default {
         /**
      * 创建网格模型
      */
-    var geometry = new three.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
-    // console.log(geometry);
-    // console.log('几何体顶点位置数据',geometry.vertices);
-    // console.log('三角面数据',geometry.faces);
-    // geometry.faces.pop();
-    // geometry.faces.pop();
-    // geometry.scale(2,2,2);
-    // geometry.translate(50,0,0);
-    geometry.rotateX(Math.PI/4);
-    geometry.faces.shift();
-    geometry.faces.shift();
-    geometry.faces.forEach(face=>{
-      face.vertexColors = [
-        new three.Color(0xffff00),
-        new three.Color(0xff00ff),
-        new three.Color(0x00ffff),
-      ]
-    })
-    // var geometry = new three.BoxBufferGeometry(100, 100); //创建一个立方体几何对象Geometry
-    console.log(geometry);
-    // console.log('几何体顶点位置数据',geometry.attributes.position);
-    // console.log('几何体索引数据',geometry.index);
+    let geometry = new three.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
+    let material = new three.MeshLambertMaterial({
+      color: 0x0099ff,
+    });
+    this.mesh = new three.Mesh(geometry, material);
 
-    var material = new three.MeshLambertMaterial({
-      // color: 0x0000ff,
-      vertexColors: three.FaceColors
-      // wireframe:true,//线框模式渲染
-    }); //材质对象Material
-    var mesh = new three.Mesh(geometry, material); //网格模型对象Mesh
-    this.scene.add(mesh); //网格模型添加到场景中
+
+    
+    this.scene.add(this.mesh);
+
+
+    // this.mesh.scale.set(0.5,1.5,2);
+
+    // this.mesh.position.set(100,100,100);
+
+    // this.mesh.translateX(100);
+
+
+    //向量Vector3对象表示方向
+    var axis = new three.Vector3(1,1,1);
+    axis.normalize();//向量归一化
+    // this.mesh.translateOnAxis(axis,200);
+
+    // this.mesh.rotateY(Math.PI/4);
+    this.mesh.rotateOnAxis(axis,Math.PI/4);
 
         // 光源设置
         // 点光源
-        let point = new three.PointLight(0xffffff);
-        point.position.set(-400,-200,-300); //点光源位置
-        console.log(point);
-        // 点光源添加到场景中
-        this.scene.add(point);
+        /**
+     * 光源设置
+     */
+    // 点光源
+    var point = new three.PointLight(0xffffff);
+    point.position.set(400, 200, 300); //点光源位置
+    this.scene.add(point); //点光源添加到场景中
+    //环境光
+    var ambient = new three.AmbientLight(0x444444);
+    this.scene.add(ambient);
 
 
         let sphereSize = 50;
         let pointLightHelper = new three.PointLightHelper( point, sphereSize );
         this.scene.add( pointLightHelper );
 
-        // 环境光
-        let ambient = new three.AmbientLight(0x444444);
-        // 环境光添加到场景中
-        this.scene.add(ambient);
+        // // 环境光
+        // let ambient = new three.AmbientLight(0x444444);
+        // // 环境光添加到场景中
+        // this.scene.add(ambient);
 
         //坐标轴对象模拟   红色：x轴  绿色： Y轴  蓝： z轴
         let axesHelper = new three.AxesHelper( 200 );
@@ -106,7 +106,7 @@ export default {
         let k = width/height; //宽高比
         let s = 150;  //三维显示范围控制系数 ,系数越大,显示的范围越大,  (视图上系数越大,三维模型显示越小)
 
-        this.camera = new three.OrthographicCamera(-s*k,s*k,-s,s,1,1000);
+        this.camera = new three.OrthographicCamera(-s*k,s*k,s,-s,1,1000);
         this.camera.position.set(200,300,200);
         this.camera.lookAt(this.scene.position);
         // this.scene.add(this.camera);
@@ -159,7 +159,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "几何体旋转，平移，缩放变换";
+    document.title = "demo16----旋转平移缩放";
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {

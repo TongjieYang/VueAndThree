@@ -23,7 +23,7 @@ import  'three-orbitcontrols'
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  name: 'demo20',
+  name: 'demo21',
   components: {},
   data() {
     //这里存放数据
@@ -47,35 +47,93 @@ export default {
         /**
      * 创建网格模型
      */
-    let geometry = new three.BoxGeometry(20, 20, 20); //创建一个立方体几何对象Geometry
-    let material = new three.MeshLambertMaterial({
-      color: 0x0000ff,
-    });
-    let group1 = new three.Group();
-    for (let index = 0; index < 10; index++) {
-      var mesh = new three.Mesh(geometry,material);
-      mesh.translateX(index*25);
-      group1.add(mesh);
-    }
-    this.scene.add(group1);
-    
-    let group2 = new three.Group();
-    for (let index = 0; index < 10; index++) {
-        let newGroup = group1.clone();
-        newGroup.translateY(index*25);
-        group2.add(newGroup);
-    }
-    this.scene.add(group2);
+    // 头部网格模型和组
+    var headMesh = sphereMesh(10, 0, 0, 0);
+    headMesh.name = "脑壳"
+    var leftEyeMesh = sphereMesh(1, 8, 5, 4);
+    leftEyeMesh.name = "左眼"
+    var rightEyeMesh = sphereMesh(1, 8, 5, -4);
+    rightEyeMesh.name = "右眼"
+    var headGroup = new three.Group();
+    headGroup.name = "头部"
+    headGroup.add(headMesh, leftEyeMesh, rightEyeMesh);
+    // 身体网格模型和组
+    var neckMesh = cylinderMesh(3, 10, 0, -15, 0);
+    neckMesh.name = "脖子"
+    var bodyMesh = cylinderMesh(14, 30, 0, -35, 0);
+    bodyMesh.name = "腹部"
+    var leftLegMesh = cylinderMesh(4, 60, 0, -80, -7);
+    leftLegMesh.name = "左腿"
+    var rightLegMesh = cylinderMesh(4, 60, 0, -80, 7);
+    rightLegMesh.name = "右腿"
+    var legGroup = new three.Group();
+    legGroup.name = "腿"
+    legGroup.add(leftLegMesh, rightLegMesh);
+    var bodyGroup = new three.Group();
+    bodyGroup.name = "身体"
+    bodyGroup.add(neckMesh, bodyMesh, legGroup);
+    // 人Group
+    var personGroup = new three.Group();
+    personGroup.name = "人"
+    personGroup.add(headGroup, bodyGroup)
+    personGroup.translateY(50)
+    this.scene.add(personGroup);
+    console.log(this.scene);
+    // 遍历场景对象scene  obj：每次遍历的对象
+    this.scene.traverse(function(obj) {
+      if (obj.type === "Group") {
+        console.log(obj.name);
+      }
+      if (obj.type === "Mesh") {
+        console.log('  ' + obj.name);
+        obj.material.color.set(0xffff00);
+      }
+      if (obj.name === "左眼" | obj.name === "右眼") {
+        obj.material.color.set(0x000000)
+      }
+      // 打印id属性
+      // console.log(obj.id);
+      // 打印该对象的父对象
+      // console.log(obj.parent);
+      // 打印该对象的子对象
+      // console.log(obj.children);
+    })
+    // 打印场景id号   id号和创建对象的顺序有关
+    // console.log(scene.id);
+    // console.log(headMesh.id);
+    // console.log(leftEyeMesh.id);
+    // console.log(rightEyeMesh.id);
 
-    let group3 = new three.Group();
-    for (let index = 0; index < 10; index++) {
-     let newGroup = group2.clone();
-        newGroup.translateZ(index*25);
-        group3.add(newGroup);
-      
-    }
-    this.scene.add(group3);
 
+    // 遍历查找对象的子对象，返回name对应的对象（name是可以重名的，返回第一个）
+    var nameNode = this.scene.getObjectByName ( "左腿" );
+    nameNode.material.color.set(0xff0000);
+    // 遍历查找对象的子对象，并返回id对应的对象
+    var idNode = this.scene.getObjectById ( 4 );
+    console.log(idNode);
+    // 球体网格模型创建函数
+    function sphereMesh(R, x, y, z) {
+      var geometry = new three.SphereGeometry(R, 25, 25); //球体几何体
+      var material = new three.MeshPhongMaterial({
+        color: 0x0000ff
+      }); //材质对象Material
+      var mesh = new three.Mesh(geometry, material); // 创建网格模型对象
+      mesh.position.set(x, y, z);
+      return mesh;
+    }
+    // 圆柱体网格模型创建函数
+    function cylinderMesh(R, h, x, y, z) {
+      var geometry = new three.CylinderGeometry(R, R, h, 25, 25); //球体几何体
+      var material = new three.MeshPhongMaterial({
+        color: 0x0000ff
+      }); //材质对象Material
+      var mesh = new three.Mesh(geometry, material); // 创建网格模型对象
+      mesh.position.set(x, y, z);
+      return mesh;
+    }
+    // 坐标系辅助显示
+    // var axesHelper = new three.AxesHelper(200);
+    // this.scene.add(axesHelper);
     /**
      * 光源设置
      */
@@ -86,6 +144,8 @@ export default {
     //环境光
     var ambient = new three.AmbientLight(0x444444);
     this.scene.add(ambient);
+    // console.log(point.id);
+    // console.log(ambient.id);
 
         //坐标轴对象模拟   红色：x轴  绿色： Y轴  蓝： z轴
         let axesHelper = new three.AxesHelper( 500 );
@@ -150,7 +210,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "demo20----组，对象，层级模型";
+    document.title = "demo21----对象节点命名，查找，遍历";
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {

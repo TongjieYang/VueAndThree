@@ -21,6 +21,10 @@
     <router-link to="/demo18" class="router-link">demo18---聚光光源，方向光</router-link>
     <router-link to="/demo19" class="router-link">demo19---平行光阴影</router-link>
     <router-link to="/demo20" class="router-link">demo20---组，对象group,层级模型</router-link>
+    <router-link to="/demo21" class="router-link">demo21---对象节点命名，查找，遍历</router-link>
+    <router-link to="/demo22" class="router-link">demo22---本地位置坐标，世界位置坐标</router-link>
+
+    <h3>8.纹理贴图</h3>
   </div>
 </template>
 

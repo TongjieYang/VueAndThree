@@ -6,10 +6,10 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import * as three from "three";
-// import { OrbitControls } from "three-orbit-controls";
+import * as THREE from "three";
+// import { OrbitControls } from "THREE-orbit-controls";
 
-// import { BoxGeometry, BoxBufferGeometry, DoubleSide } from "three";
+// import { BoxGeometry, BoxBufferGeometry, DoubleSide } from "THREE";
 import  'three-orbitcontrols'
 
 // import {
@@ -19,11 +19,11 @@ import  'three-orbitcontrols'
 //   BoxGeometry,
 //   MeshBasicMaterial,
 //   Mesh
-// } from 'three';
+// } from 'THREE';
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  name: 'demo20',
+  name: 'demo22',
   components: {},
   data() {
     //这里存放数据
@@ -43,52 +43,48 @@ export default {
       init: function(){
         let canvasContainer = document.getElementById('canvas-container2');
         //   创建场景
-        this.scene = new three.Scene();
+        this.scene = new THREE.Scene();
         /**
      * 创建网格模型
      */
-    let geometry = new three.BoxGeometry(20, 20, 20); //创建一个立方体几何对象Geometry
-    let material = new three.MeshLambertMaterial({
-      color: 0x0000ff,
-    });
-    let group1 = new three.Group();
-    for (let index = 0; index < 10; index++) {
-      var mesh = new three.Mesh(geometry,material);
-      mesh.translateX(index*25);
-      group1.add(mesh);
-    }
-    this.scene.add(group1);
-    
-    let group2 = new three.Group();
-    for (let index = 0; index < 10; index++) {
-        let newGroup = group1.clone();
-        newGroup.translateY(index*25);
-        group2.add(newGroup);
-    }
-    this.scene.add(group2);
+    var geometry = new THREE.BoxGeometry(20, 20, 20); //创建一个立方体几何对象Geometry
+    var material = new THREE.MeshLambertMaterial({
+      color: 0x0000ff
+    }); //材质对象Material
+    var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
+    mesh.position.set(50, 0, 0)
+    var group = new THREE.Group();
+    group.add(mesh); //网格模型添加到组中
+    group.position.set(50, 0, 0)
+    this.scene.add(group); //组添加到场景中
 
-    let group3 = new three.Group();
-    for (let index = 0; index < 10; index++) {
-     let newGroup = group2.clone();
-        newGroup.translateZ(index*25);
-        group3.add(newGroup);
-      
-    }
-    this.scene.add(group3);
+    // 获得世界坐标
 
+    //该语句默认在threejs渲染的过程中执行  如果想获得世界矩阵属性、世界位置属性等属性，需要手动更新
+    // this.scene.updateMatrixWorld(true);
+    // this.scene.autoUpdate = true;
+    var worldPosition = new THREE.Vector3();
+    mesh.getWorldPosition(worldPosition)
+    console.log('世界坐标',worldPosition);
+    console.log('本地坐标',mesh.position);
+    // 坐标系辅助显示
+    // var axesHelper = new THREE.AxesHelper(200);
+    // this.scene.add(axesHelper);
     /**
      * 光源设置
      */
     //点光源
-    var point = new three.PointLight(0xffffff);
+    // var mixer = new THREE.AnimationMixer(mesh); //创建混合器
+    // var mixer = new THREE.AnimationMixer(mesh); //创建混合器
+    var point = new THREE.PointLight(0xffffff);
     point.position.set(400, 200, 300); //点光源位置
     this.scene.add(point); //点光源添加到场景中
     //环境光
-    var ambient = new three.AmbientLight(0x444444);
+    var ambient = new THREE.AmbientLight(0x444444);
     this.scene.add(ambient);
 
         //坐标轴对象模拟   红色：x轴  绿色： Y轴  蓝： z轴
-        let axesHelper = new three.AxesHelper( 500 );
+        let axesHelper = new THREE.AxesHelper( 500 );
         this.scene.add( axesHelper );
 
         // 相机设置
@@ -97,14 +93,14 @@ export default {
         let k = width/height; //宽高比
         let s = 150;  //三维显示范围控制系数 ,系数越大,显示的范围越大,  (视图上系数越大,三维模型显示越小)
 
-        this.camera = new three.OrthographicCamera(-s*k,s*k,s,-s,1,1000);
+        this.camera = new THREE.OrthographicCamera(-s*k,s*k,s,-s,1,1000);
         this.camera.position.set(200,300,200);
         this.camera.lookAt(this.scene.position);
         // this.scene.add(this.camera);
 
 
         // 创建渲染器对象
-        this.renderer = new three.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(width,height); //设置渲染尺寸大小
         this.renderer.setClearColor(0xb9d3ff,1);  //设置背景颜色
         this.renderer.shadowMap.enabled = true;
@@ -121,7 +117,7 @@ export default {
         // }
         // render();
         // //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-        // let controls = new three.OrbitControls(this.camera,this.renderer.domElement);
+        // let controls = new THREE.OrbitControls(this.camera,this.renderer.domElement);
         // console.log(controls);
         // 框架1  end
 
@@ -135,7 +131,7 @@ export default {
         }
         render();
         //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-        let controls = new three.OrbitControls(this.camera,this.renderer.domElement);
+        let controls = new THREE.OrbitControls(this.camera,this.renderer.domElement);
         console.log(controls);
         //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
         controls.addEventListener('change', render);
@@ -150,7 +146,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "demo20----组，对象，层级模型";
+    document.title = "demo22----本地位置坐标，世界位置坐标";
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {

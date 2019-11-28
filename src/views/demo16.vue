@@ -47,17 +47,53 @@ export default {
         /**
      * 创建网格模型
      */
-    let geometry = new three.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
-    let material = new three.MeshLambertMaterial({
-      color: 0x0099ff,
-    });
-    this.mesh = new three.Mesh(geometry, material);
+    // let geometry = new three.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
+    // let material = new three.MeshLambertMaterial({
+    //   color: 0x0099ff,
+    // });
+    // this.mesh = new three.Mesh(geometry, material);
+    // this.scene.add(this.mesh);
 
 
-    
-    this.scene.add(this.mesh);
 
-
+    /**
+    * 创建网格模型
+    */
+   var geometry2 = new three.ConeGeometry(20, 50, 4, true);
+   var material2 = new three.MeshBasicMaterial({
+    color: 0x00ff00,
+    transparent: true,
+    opacity: 0.5,
+    wireframe:false
+    //    wireframe: true
+    //    透明度
+    //    是否透明
+   });
+   //   material.x = -100;
+   var mesh2 = new three.Mesh(geometry2, material2);
+   console.log(geometry2);
+   var material3 = new three.LineBasicMaterial({
+    //    color: 0x00ff00,
+    color: 0x00ff00,
+    linewidth: 10,
+    wireframe:false
+    //    线宽
+    //    线颜色
+   });
+   //   material.x = -100;
+  //  var geometry3 = new three.Geometry(); 
+   var geometry3 = new three.EdgesGeometry( geometry2 );
+  //  var geometry3 = new three.WireframeGeometry( geometry2 );
+    // setFromPoints方法从points中提取数据改变几何体的顶点属性verticess
+    // geometry3.setFromPoints(geometry2.vertices);
+   var mesh3 = new three.Line(geometry3, material3);
+   var group1 = new three.Group();
+   group1.add(mesh2, mesh3);
+   //   mesh.rotateY(Math.PI);
+   var vec = new three.Vector3(1, 0, 1);
+   vec.normalize();
+   group1.rotateOnAxis(vec, Math.PI);
+   this.scene.add(group1);
     // this.mesh.scale.set(0.5,1.5,2);
 
     // this.mesh.position.set(100,100,100);
@@ -71,7 +107,7 @@ export default {
     // this.mesh.translateOnAxis(axis,200);
 
     // this.mesh.rotateY(Math.PI/4);
-    this.mesh.rotateOnAxis(axis,Math.PI/4);
+    // this.mesh.rotateOnAxis(axis,Math.PI/4);
 
         // 光源设置
         // 点光源

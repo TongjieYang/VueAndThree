@@ -24,7 +24,7 @@ import earth from '@/assets/images/Earth.png'
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  name: 'demo23',
+  name: 'demo24',
   components: {},
   data() {
     //这里存放数据
@@ -49,10 +49,36 @@ export default {
      * 创建网格模型
      */
     // var geometry = new THREE.BoxGeometry(20, 20, 20); //创建一个立方体几何对象Geometry
-    var geometry = new THREE.PlaneGeometry(204,102);
+    // var geometry = new THREE.PlaneGeometry(204,102,4,4);
+    var geometry = new THREE.SphereGeometry(50,25,25);
     // var material = new THREE.MeshLambertMaterial({
     //   color: 0x0000ff
     // }); //材质对象Material
+
+    // 查看默认的uv坐标
+    console.log('planegeometry',geometry);
+    console.log('默认uv坐标',geometry.faceVertexUvs[0]);
+    /**
+     * 遍历uv坐标
+     */
+    // geometry.faceVertexUvs[0].forEach(elem => {
+    //   elem.forEach(Vector2 => {
+    //     // 所有的UV坐标全部设置为一个值
+    //     Vector2.set(0.4,0.4);
+    //   });
+    // });
+    /**
+     * 局部三角面显示完整纹理贴图
+     */
+    var t0 = new THREE.Vector2(0, 1); //图片左下角
+    var t1 = new THREE.Vector2(0, 0); //图片右下角
+    var t2 = new THREE.Vector2(1, 0); //图片右上角
+    var t3 = new THREE.Vector2(1, 1); //图片左上角
+    var uv1 = [t0, t1, t3]; //选中图片一个三角区域像素——用于映射到一个三角面
+    var uv2 = [t1, t2, t3]; //选中图片一个三角区域像素——用于映射到一个三角面
+    // 设置第五、第六个三角面对应的纹理坐标
+    geometry.faceVertexUvs[0][4] = uv1
+    geometry.faceVertexUvs[0][5] = uv2
 
     let that = this;
     // 纹理加载器
@@ -62,27 +88,23 @@ export default {
     textureLoader.load(earth,function(texture){
       // 设置纹理
       var material = new THREE.MeshLambertMaterial({
-        map:texture,
-        side: THREE.DoubleSide,
-        // wireframe: true,
+        map:texture
       });
       that.mesh = new THREE.Mesh(geometry,material);
       that.scene.add(that.mesh);
     });
-    imageLoader.load(earth,function(img){
-      // images对象作为参数，创建一个纹理对象Texture
-      var texture = new THREE.Texture(img);
-      texture.needsUpdate = true;
-      var material = new THREE.MeshLambertMaterial({
-        map: texture,
-        side: THREE.DoubleSide,
-        wireframe: true,
-      });
-      var mesh = new THREE.Mesh(geometry,material);
-      // mesh.position.set(100,0,0);
-      mesh.rotateY(Math.PI/2);
-      that.scene.add(mesh);
-    });
+    // imageLoader.load(earth,function(img){
+    //   // images对象作为参数，创建一个纹理对象Texture
+    //   var texture = new THREE.Texture(img);
+    //   texture.needsUpdate = true;
+    //   var material = new THREE.MeshLambertMaterial({
+    //     map: texture
+    //   });
+    //   var mesh = new THREE.Mesh(geometry,material);
+    //   // mesh.position.set(100,0,0);
+    //   mesh.rotateY(Math.PI/2);
+    //   that.scene.add(mesh);
+    // });
     // var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
     // mesh.position.set(50, 0, 0)
     // var group = new THREE.Group();
@@ -178,7 +200,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "demo23----纹理贴图";
+    document.title = "demo24----重置几何体纹理坐标";
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {

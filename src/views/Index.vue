@@ -25,6 +25,8 @@
     <router-link to="/demo22" class="router-link">demo22---本地位置坐标，世界位置坐标</router-link>
 
     <h3>8.纹理贴图</h3>
+    <router-link to="/demo23" class="router-link">demo23---创建纹理贴图</router-link>
+    <router-link to="/demo23" class="router-link">demo24---重置几何体纹理</router-link>
   </div>
 </template>
 

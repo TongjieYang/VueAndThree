@@ -26,7 +26,10 @@
 
     <h3>8.纹理贴图</h3>
     <router-link to="/demo23" class="router-link">demo23---创建纹理贴图</router-link>
-    <router-link to="/demo23" class="router-link">demo24---重置几何体纹理</router-link>
+    <router-link to="/demo24" class="router-link">demo24---重置几何体纹理</router-link>
+    <router-link to="/demo25" class="router-link">demo25---创建三角面设置UV坐标</router-link>
+
+    <router-link to="/demo27" class="router-link">demo27---引入外部模型</router-link>
   </div>
 </template>
 

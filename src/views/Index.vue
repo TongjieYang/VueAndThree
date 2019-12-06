@@ -30,6 +30,11 @@
     <router-link to="/demo25" class="router-link">demo25---创建三角面设置UV坐标</router-link>
 
     <router-link to="/demo27" class="router-link">demo27---引入外部模型</router-link>
+    <router-link to="/demo28" class="router-link">demo28---阵列设置重复纹理</router-link>
+    <router-link to="/demo29" class="router-link">demo29---纹理偏移</router-link>
+    <router-link to="/demo30" class="router-link">demo30---草地效果</router-link>
+    <router-link to="/demo31" class="router-link">demo31---纹理移动动画效果</router-link>
+    <router-link to="/demo32" class="router-link">demo32---canvas画布作为纹理贴图</router-link>
   </div>
 </template>
 

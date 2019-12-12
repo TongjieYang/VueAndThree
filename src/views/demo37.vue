@@ -19,7 +19,10 @@ import  'three-orbitcontrols'
 // import modelData from "@/assets/data/model.json";
 // import videoUrl from "@/assets/media/1086x716.mp4";
 // import sintel from "@/assets/media/sintel.mp4";
-import normalImg from '@/assets/images/3_256.jpg';
+// import normalImg from '@/assets/images/3_256.jpg';
+import earthDiffuse from "@/assets/images/earth_diffuse.png";
+import earthSpecular from "@/assets/images/earth_specular.png";
+// import textureBump from "@/assets/images/bump.jpg";
 // import {
 //   Scene,
 //   WebGLRenderer,
@@ -31,7 +34,7 @@ import normalImg from '@/assets/images/3_256.jpg';
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  name: 'demo34',
+  name: 'demo37',
   components: {},
   data() {
     //这里存放数据
@@ -54,29 +57,46 @@ export default {
         //   创建场景
         this.scene = new THREE.Scene();
       // var geometry = new THREE.PlaneGeometry(512, 256); //矩形平面
-      var geometry = new THREE.BoxGeometry(100,100,100);
+      // var geometry = new THREE.BoxGeometry(100,100,100);
+
+      // 创建网格模型对象
+      // var geometry = new THREE.BoxGeometry(100, 100, 100); //立方体
+      // var geometry = new THREE.PlaneGeometry(204, 102); //矩形平面
+      var geometry = new THREE.SphereGeometry(100, 35, 35); //球体
+
       var textureLoader = new THREE.TextureLoader();
-      console.log(normalImg);
-      var textureNormal = textureLoader.load(normalImg);
+      var texture = textureLoader.load(earthDiffuse);
+      var textureSpecular = textureLoader.load(earthSpecular);
+
       var material = new THREE.MeshPhongMaterial({
-        color: 0x990000,
-        normalMap: textureNormal,
-        normalScale: new THREE.Vector2(3,3)
+        // shininess: 70,
+        shininess: 70,
+        map: texture,
+        specularMap: textureSpecular
       });
-      console.log('打印材料',material);
-      var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-      this.scene.add(mesh); //网格模型添加到场景中
-    // this.scene.add(new THREE.AxesHelper(300))
+      var mesh = new THREE.Mesh(geometry,material);
+      this.scene.add(mesh);
     /**
      * 光源设置
      */
-    //点光源
-    var point = new THREE.PointLight(0xffffff);
-    point.position.set(400, 200, 300); //点光源位置
-    this.scene.add(point); //点光源添加到场景中
-    //环境光
-    var ambient = new THREE.AmbientLight(0xffffff);
-    this.scene.add(ambient);
+    var ambient = new THREE.AmbientLight(0x444444);
+    this.scene.add(ambient); //环境光对象添加到scene场景中
+
+    // 方向光
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    // 设置光源位置
+    directionalLight.position.set(60, 100, 40);
+    directionalLight.castShadow = true;
+    directionalLight.shadow.camera.near = 0.5;
+    directionalLight.shadow.camera.far = 300;
+    directionalLight.shadow.camera.left = -50;
+    directionalLight.shadow.camera.right = 50;
+    directionalLight.shadow.camera.top = 200;
+    directionalLight.shadow.camera.bottom = -100;
+    // 设置mapSize属性可以使阴影更清晰，不那么模糊
+    // directionalLight.shadow.mapSize.set(1024,1024)
+    
+    this.scene.add(directionalLight);
 
         //坐标轴对象模拟   红色：x轴  绿色： Y轴  蓝： z轴
         let axesHelper = new THREE.AxesHelper( 500 );
@@ -147,7 +167,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "demo34---法线贴图";
+    document.title = "demo37---高光贴图";
     // console.log('model.json',modelData);
   },
   //生命周期 - 挂载完成（可以访问DOM元素）

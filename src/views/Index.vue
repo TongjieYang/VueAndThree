@@ -35,6 +35,9 @@
     <router-link to="/demo30" class="router-link">demo30---草地效果</router-link>
     <router-link to="/demo31" class="router-link">demo31---纹理移动动画效果</router-link>
     <router-link to="/demo32" class="router-link">demo32---canvas画布作为纹理贴图</router-link>
+    <router-link to="/demo33" class="router-link">demo33---视频作为纹理贴图</router-link>
+    <router-link to="/demo34" class="router-link">demo34---法线贴图</router-link>
+    <router-link to="/demo35" class="router-link">demo345--凹凸贴图</router-link>
   </div>
 </template>
 

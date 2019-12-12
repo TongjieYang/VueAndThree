@@ -19,7 +19,9 @@ import  'three-orbitcontrols'
 // import modelData from "@/assets/data/model.json";
 // import videoUrl from "@/assets/media/1086x716.mp4";
 // import sintel from "@/assets/media/sintel.mp4";
-import normalImg from '@/assets/images/3_256.jpg';
+// import normalImg from '@/assets/images/3_256.jpg';
+import shadow from "@/assets/images/shadow.png";
+// import textureBump from "@/assets/images/bump.jpg";
 // import {
 //   Scene,
 //   WebGLRenderer,
@@ -31,7 +33,7 @@ import normalImg from '@/assets/images/3_256.jpg';
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  name: 'demo34',
+  name: 'demo36',
   components: {},
   data() {
     //这里存放数据
@@ -54,29 +56,55 @@ export default {
         //   创建场景
         this.scene = new THREE.Scene();
       // var geometry = new THREE.PlaneGeometry(512, 256); //矩形平面
-      var geometry = new THREE.BoxGeometry(100,100,100);
-      var textureLoader = new THREE.TextureLoader();
-      console.log(normalImg);
-      var textureNormal = textureLoader.load(normalImg);
-      var material = new THREE.MeshPhongMaterial({
-        color: 0x990000,
-        normalMap: textureNormal,
-        normalScale: new THREE.Vector2(3,3)
+      // var geometry = new THREE.BoxGeometry(100,100,100);
+
+      // 创建网格模型对象
+      var geometry = new THREE.BoxGeometry(40,100,40);
+      var material = new THREE.MeshLambertMaterial({
+        color: 0x0000ff
       });
-      console.log('打印材料',material);
-      var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-      this.scene.add(mesh); //网格模型添加到场景中
+      var mesh = new THREE.Mesh(geometry,material);
+      mesh.castShadow = true;
+      this.scene.add(mesh);
+
+
+      // 创建平面几何体作为阴影接收对象
+      var planeGeometry = new THREE.PlaneGeometry(300,200);
+      planeGeometry.faceVertexUvs[1] = planeGeometry.faceVertexUvs[0];
+      var textureLoader = new THREE.TextureLoader();
+      var textureLight = textureLoader.load(shadow);
+      var planeMaterial = new THREE.MeshLambertMaterial({
+        color: 0x999999,
+        // lightMap: textureLight,
+      });
+      var planeMesh = new THREE.Mesh(planeGeometry, planeMaterial); //网格模型对象Mesh
+      planeMesh.receiveShadow = true;
+      this.scene.add(planeMesh); //网格模型添加到场景中
+      planeMesh.rotateX(-Math.PI / 2); //旋转网格模型
+      planeMesh.position.y = -50; //设置网格模型y坐标
+
     // this.scene.add(new THREE.AxesHelper(300))
     /**
      * 光源设置
      */
-    //点光源
-    var point = new THREE.PointLight(0xffffff);
-    point.position.set(400, 200, 300); //点光源位置
-    this.scene.add(point); //点光源添加到场景中
-    //环境光
-    var ambient = new THREE.AmbientLight(0xffffff);
-    this.scene.add(ambient);
+    var ambient = new THREE.AmbientLight(0x444444);
+    this.scene.add(ambient); //环境光对象添加到scene场景中
+
+    // 方向光
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    // 设置光源位置
+    directionalLight.position.set(60, 100, 40);
+    directionalLight.castShadow = true;
+    directionalLight.shadow.camera.near = 0.5;
+    directionalLight.shadow.camera.far = 300;
+    directionalLight.shadow.camera.left = -50;
+    directionalLight.shadow.camera.right = 50;
+    directionalLight.shadow.camera.top = 200;
+    directionalLight.shadow.camera.bottom = -100;
+    // 设置mapSize属性可以使阴影更清晰，不那么模糊
+    // directionalLight.shadow.mapSize.set(1024,1024)
+    
+    this.scene.add(directionalLight);
 
         //坐标轴对象模拟   红色：x轴  绿色： Y轴  蓝： z轴
         let axesHelper = new THREE.AxesHelper( 500 );
@@ -147,7 +175,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "demo34---法线贴图";
+    document.title = "demo36---阴影贴图";
     // console.log('model.json',modelData);
   },
   //生命周期 - 挂载完成（可以访问DOM元素）

@@ -19,7 +19,9 @@ import  'three-orbitcontrols'
 // import modelData from "@/assets/data/model.json";
 // import videoUrl from "@/assets/media/1086x716.mp4";
 // import sintel from "@/assets/media/sintel.mp4";
-import normalImg from '@/assets/images/3_256.jpg';
+// import normalImg from '@/assets/images/3_256.jpg';
+import diffuse from "@/assets/images/diffuse.jpg";
+import textureBump from "@/assets/images/bump.jpg";
 // import {
 //   Scene,
 //   WebGLRenderer,
@@ -31,7 +33,7 @@ import normalImg from '@/assets/images/3_256.jpg';
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  name: 'demo34',
+  name: 'demo35',
   components: {},
   data() {
     //这里存放数据
@@ -54,14 +56,20 @@ export default {
         //   创建场景
         this.scene = new THREE.Scene();
       // var geometry = new THREE.PlaneGeometry(512, 256); //矩形平面
-      var geometry = new THREE.BoxGeometry(100,100,100);
+      // var geometry = new THREE.BoxGeometry(100,100,100);
+      var geometry = new THREE.PlaneGeometry(400,400);
       var textureLoader = new THREE.TextureLoader();
-      console.log(normalImg);
-      var textureNormal = textureLoader.load(normalImg);
+      // console.log(normalImg);
+      // var textureNormal = textureLoader.load(normalImg);
+      var texture = textureLoader.load(diffuse);
+      var textureBump = textureLoader.load(textureBump);
       var material = new THREE.MeshPhongMaterial({
-        color: 0x990000,
-        normalMap: textureNormal,
-        normalScale: new THREE.Vector2(3,3)
+        // color: 0x990000,
+        // normalMap: textureNormal,
+        // normalScale: new THREE.Vector2(3,3)
+        map: texture,
+        bumpMap: textureBump,
+        bumpScale: 3,
       });
       console.log('打印材料',material);
       var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
@@ -147,7 +155,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "demo34---法线贴图";
+    document.title = "demo35---凹凸贴图";
     // console.log('model.json',modelData);
   },
   //生命周期 - 挂载完成（可以访问DOM元素）

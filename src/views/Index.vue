@@ -24,7 +24,7 @@
     <router-link to="/demo21" class="router-link">demo21---对象节点命名，查找，遍历</router-link>
     <router-link to="/demo22" class="router-link">demo22---本地位置坐标，世界位置坐标</router-link>
 
-    <h3>8.纹理贴图</h3>
+    <h3 class="router-title">8.纹理贴图</h3>
     <router-link to="/demo23" class="router-link">demo23---创建纹理贴图</router-link>
     <router-link to="/demo24" class="router-link">demo24---重置几何体纹理</router-link>
     <router-link to="/demo25" class="router-link">demo25---创建三角面设置UV坐标</router-link>
@@ -37,7 +37,24 @@
     <router-link to="/demo32" class="router-link">demo32---canvas画布作为纹理贴图</router-link>
     <router-link to="/demo33" class="router-link">demo33---视频作为纹理贴图</router-link>
     <router-link to="/demo34" class="router-link">demo34---法线贴图</router-link>
-    <router-link to="/demo35" class="router-link">demo345--凹凸贴图</router-link>
+    <router-link to="/demo35" class="router-link">demo35--凹凸贴图</router-link>
+    <router-link to="/demo36" class="router-link">demo36--阴影贴图</router-link>
+    <router-link to="/demo37" class="router-link">demo37--高光贴图</router-link>
+    <router-link to="/demo38" class="router-link">demo38--环境贴图</router-link>
+    <router-link to="/demo39" class="router-link">demo39--数据纹理对象</router-link>
+
+
+    <h3 class="router-title">9.相机</h3>
+    <router-link to="/demo40" class="router-link">demo40--正交相机</router-link>
+    <router-link to="/demo41" class="router-link">demo41--透视相机</router-link>
+
+
+    <h3 class="router-title">10.点精灵和粒子系统</h3>
+    <router-link to="/demo42" class="router-link">demo42--精灵模型对象</router-link>
+    <router-link to="/demo43" class="router-link">demo43--精灵透视投影相机</router-link>
+    <router-link to="/demo44" class="router-link">demo44--点模型</router-link>
+    <router-link to="/demo45" class="router-link">demo45--网格模型</router-link>
+    <router-link to="/demo46" class="router-link">demo46--线模型</router-link>
   </div>
 </template>
 
@@ -55,16 +72,25 @@ export default {
 <style lang="less" scoped>
 .router-link-container{
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
     width: 100%;
     height: 100%;
+    .router-title{
+      flex-basis: 100%;
+      margin-left: 20px;
+      font-size: 25px;
+      color: #333;
+    }
     .router-link{
-        color: #666;
-        line-height: 150%;
-        font-size: 15px;
-        
+      flex-basis: 33%;
+      color: #666;
+      line-height: 150%;
+      font-size: 15px;
+      margin-left: 20px;
     }
 }
     

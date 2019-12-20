@@ -67,7 +67,8 @@ export default {
           // size: 20.0,
           // transparent: true
         });
-        var line = new THREE.Line(geometry,material);
+        // var line = new THREE.Line(geometry,material);
+        var line = new THREE.LineLoop(geometry,material);
         this.scene.add(line);
 
 

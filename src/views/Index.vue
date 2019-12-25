@@ -55,6 +55,8 @@
     <router-link to="/demo44" class="router-link">demo44--点模型</router-link>
     <router-link to="/demo45" class="router-link">demo45--网格模型</router-link>
     <router-link to="/demo46" class="router-link">demo46--线模型</router-link>
+
+    <h3 class="router-title">11.帧动画模块</h3>
   </div>
 </template>
 

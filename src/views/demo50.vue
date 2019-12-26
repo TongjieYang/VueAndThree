@@ -36,7 +36,7 @@ import spriteData from "@/assets/data/sprite.json"
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  name: 'demo47',
+  name: 'demo50',
   components: {},
   data() {
     //这里存放数据
@@ -75,24 +75,39 @@ export default {
           texture.needsUpdate = true;
           spriteData.forEach(elem => {
             // 精灵材质
-            var spriteMaterial = new THREE.SpriteMaterial({
-              map: texture, //设置精灵纹理贴图
-              transparent: true,
-              opacity: 0.5,
+            var material = new THREE.MeshBasicMaterial({
+              // map: texture,
+              // size: 10
+
+
+
+              // color: 0xffff00,
+              // transparent: true,
+              // opacity: 0.5,
+
+
+                map: texture,
+                transparent: true,
+                opacity: 0.5,
             });
             // 创建精灵模型对象
-            var sprite = new THREE.Sprite(spriteMaterial);
-            group.add(sprite);
+            let planeGeometry = new THREE.PlaneGeometry(1,1);
+            let mesh = new THREE.Mesh(planeGeometry,material);
+            // group.add(points);
             // 控制精灵大小   使用PM2.5大小设置精灵模型的大小
             // 注意适当缩放pm2.5大小,以便得到更好的显示效果
             var k = elem.value / 200
-            sprite.scale.set(k, k, 1);
+            mesh.scale.set(k, k, 1);
+            
             //获得城市坐标设置精灵模型对象的位置
-            sprite.position.set(elem.coordinate[0], elem.coordinate[1], 0)
+            mesh.position.set(elem.coordinate[0], elem.coordinate[1], 0); 
+            group.add(mesh);
           });
-          // 中国城市坐标整体的几何中心不在坐标原点，需要适当的平移
           group.position.set(-110, -30, 0);
-          that.scene.add(group);//把精灵群组插入场景中
+          this.scene.add(group);
+          // 中国城市坐标整体的几何中心不在坐标原点，需要适当的平移
+          // group.position.set(-110, -30, 0);
+          // that.scene.add(group);//把精灵群组插入场景中
         // });
 
 
@@ -181,7 +196,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "demo47-----点精灵实现";
+    document.title = "demo50-----PlaneGeometry实现";
     // console.log('model.json',modelData);
   },
   //生命周期 - 挂载完成（可以访问DOM元素）

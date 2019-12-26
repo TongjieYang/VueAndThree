@@ -50,13 +50,22 @@
 
 
     <h3 class="router-title">10.点精灵和粒子系统</h3>
+    <h5 class="router-title">（1）精灵模型对象</h5>
     <router-link to="/demo42" class="router-link">demo42--精灵模型对象</router-link>
     <router-link to="/demo43" class="router-link">demo43--精灵透视投影相机</router-link>
     <router-link to="/demo44" class="router-link">demo44--点模型</router-link>
     <router-link to="/demo45" class="router-link">demo45--网格模型</router-link>
     <router-link to="/demo46" class="router-link">demo46--线模型</router-link>
-
-    <h3 class="router-title">11.帧动画模块</h3>
+    <h5 class="router-title">（2）中国城市PM2.5</h5>
+    <router-link to="/demo47" class="router-link">demo47--点精灵实现</router-link>
+    <router-link to="/demo48" class="router-link">demo48--points模型只能表示位置</router-link>
+    <router-link to="/demo49" class="router-link">demo49--CircleGeometry实现</router-link>
+    <router-link to="/demo50" class="router-link">demo50--PlaneGeometry实现</router-link>
+    <h5 class="router-title">（3）树林效果</h5>
+    <router-link to="/demo51" class="router-link">demo51--树林效果模拟</router-link>
+    <h5 class="router-title">（4）下雨场景效果模拟</h5>
+    <router-link to="/demo52" class="router-link">demo52--空间中随机生产静态的雨滴</router-link>
+    <h5 class="router-title">11.帧动画模块</h5>
   </div>
 </template>
 
@@ -81,10 +90,16 @@ export default {
     flex-wrap: wrap;
     width: 100%;
     height: 100%;
-    .router-title{
+    h3.router-title{
       flex-basis: 100%;
       margin-left: 20px;
       font-size: 25px;
+      color: #333;
+    }
+    h5.router-title{
+      flex-basis: 100%;
+      margin-left: 25px;
+      font-size: 20px;
       color: #333;
     }
     .router-link{

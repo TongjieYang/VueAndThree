@@ -39,7 +39,7 @@ import { MeshLambertMaterial } from 'three';
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  name: 'demo52',
+  name: 'demo53',
   components: {},
   data() {
     //这里存放数据
@@ -61,6 +61,7 @@ export default {
         let canvasContainer = document.getElementById('canvas-container2');
         //   创建场景
         this.scene = new THREE.Scene();
+        var group = new THREE.Group();
         var textureLoader = new THREE.TextureLoader();
         var rainTexture = textureLoader.load(rain);
         for(var i = 0; i<1000; i++){
@@ -68,14 +69,14 @@ export default {
             map: rainTexture
           });
           var sprite = new THREE.Sprite(spriteMaterial);
-          this.scene.add(sprite);
+          group.add(sprite);
           sprite.scale.set(8,10,1);
           var k1 = Math.random()-0.5;
           var k2 = Math.random()-0.5;
           var k3 = Math.random()-0.5;
           sprite.position.set(200*k1,200*k2,200*k3);
         }
-
+          this.scene.add(group);
 
         //点光源
         var point = new THREE.PointLight(0xffffff);
@@ -104,7 +105,7 @@ export default {
         var height = window.innerHeight; //窗口高度
         /**透视投影相机对象*/
         this.camera = new THREE.PerspectiveCamera(60, width / height, 1, 2000);
-        this.camera.position.set(100, 100, 100); //设置相机位置
+        this.camera.position.set(0, 0, 200); //设置相机位置
         this.camera.lookAt(this.scene.position); //设置相机方向(指向的场景对象)
         this.scene.add(this.camera);
         /**
@@ -121,8 +122,16 @@ export default {
 
         // 渲染函数
         function render() {
+            group.children.forEach(sprite => {
+              // console.log('打印每项',sprite);
+              sprite.position.y -= 1;
+              if(sprite.position.y < 0){
+                sprite.position.y = 200;
+              }
+            });
             renderer.render(that.scene,that.camera);//执行渲染操作
             requestAnimationFrame(render);//请求再次执行渲染函数render，渲染下一帧
+            
         }
         render();
         //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
@@ -136,7 +145,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    document.title = "demo52-----空间中随机生成静态的雨滴";
+    document.title = "demo53-----雨滴动态运动";
     // console.log('model.json',modelData);
   },
   //生命周期 - 挂载完成（可以访问DOM元素）

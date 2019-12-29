@@ -66,6 +66,8 @@
     <h5 class="router-title">（4）下雨场景效果模拟</h5>
     <router-link to="/demo52" class="router-link">demo52--空间中随机生产静态的雨滴</router-link>
     <router-link to="/demo53" class="router-link">demo53--雨滴动态运动</router-link>
+    <router-link to="/demo54" class="router-link">demo54--站在雨中的效果</router-link>
+    <router-link to="/demo55" class="router-link">demo55--匀速下落</router-link>
     <h5 class="router-title">11.帧动画模块</h5>
   </div>
 </template>

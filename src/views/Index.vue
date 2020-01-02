@@ -68,7 +68,44 @@
     <router-link to="/demo53" class="router-link">demo53--雨滴动态运动</router-link>
     <router-link to="/demo54" class="router-link">demo54--站在雨中的效果</router-link>
     <router-link to="/demo55" class="router-link">demo55--匀速下落</router-link>
-    <h5 class="router-title">11.帧动画模块</h5>
+    <h3 class="router-title">11.帧动画模块</h3>
+    <h5 class="router-title">（1）创建关键帧并解析</h5>
+    <router-link to="/demo56" class="router-link">demo56--创建关键帧并解析</router-link>
+    <h5 class="router-title">（2）解析外部模型的的帧动画</h5>
+    <router-link to="/demo57" class="router-link">demo57--解析外部模型的的帧动画</router-link>
+    <h5 class="router-title">（3）3.播放设置(暂停、时间段、时间点)</h5>
+    <router-link to="/demo58" class="router-link">demo58--0.暂停继续</router-link>
+    <router-link to="/demo59" class="router-link">demo59--1.播放clip的特定时间段</router-link>
+    <router-link to="/demo60" class="router-link">demo60--2.定位在某个时间点</router-link>
+    <router-link to="/demo61" class="router-link">demo61--3.按钮设置时间点</router-link>
+    <router-link to="/demo62" class="router-link">demo62--4.滚动条拖动</router-link>
+
+
+    <h3 class="router-title">12.骨骼动画、变形动画帧</h3>
+    <h5 class="router-title">（1）骨骼动画原理</h5>
+    <router-link to="/demo63" class="router-link">demo63--0.手动创建一个骨骼网格模型</router-link>
+    <router-link to="/demo64" class="router-link">demo63--1.骨骼网格模型设置动画</router-link>
+
+    <h5 class="router-title">（2）加载外部模型骨骼动画</h5>
+    <router-link to="/demo64" class="router-link">demo64--0.查看骨骼数据</router-link>
+    <router-link to="/demo65" class="router-link">demo65--1.解析骨骼的帧动画数据</router-link>
+
+    <h5 class="router-title">（3）变形目标动画原理</h5>
+    <router-link to="/demo66" class="router-link">demo66--0.创建一组变形目标数据</router-link>
+    <router-link to="/demo67" class="router-link">demo67--1.使用帧动画模块编辑播放(1)</router-link>
+
+    <h5 class="router-title">（4）解析外部模型变形目标数据</h5>
+    <router-link to="/demo68" class="router-link">demo68--0.解析变形目标数据</router-link>
+    <router-link to="/demo69" class="router-link">demo69--1.vue滑动条控制变形权重</router-link>
+    <router-link to="/demo70" class="router-link">demo70--2.解析播放帧动画</router-link>
+    <router-link to="/demo71" class="router-link">demo71--3.变形目标生成帧动画</router-link>
+
+    <h3 class="router-title">13.语音模块</h3>
+  
+
+
+    <h3 class="router-title">14.模型文件加载</h3>
+    
   </div>
 </template>
 
@@ -106,7 +143,7 @@ export default {
       color: #333;
     }
     .router-link{
-      flex-basis: 33%;
+      flex-basis: 14%;
       color: #666;
       line-height: 150%;
       font-size: 15px;

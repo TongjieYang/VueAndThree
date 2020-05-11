@@ -132,32 +132,39 @@ export default {
         
 
         // 框架1  start
+        // let controls = new THREE.OrbitControls(this.camera,this.renderer.domElement);
+        // controls.enableZoom = true;
+				// controls.enablePan = false;
+				// controls.enableDamping = true;
+				// controls.rotateSpeed = - 0.25;
         // let render = function render(){
         //     that.renderer.render(that.scene,that.camera);
         //     // that.mesh.rotateY(0.01);
         //     requestAnimationFrame(render);
+        //     controls.update(); 
         // }
         // render();
-        // //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
+        //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
         // let controls = new THREE.OrbitControls(this.camera,this.renderer.domElement);
         // console.log(controls);
         // 框架1  end
 
 
-        // 框架2  start
+        // // 框架2  start
         
         let render = function render(){
             that.renderer.render(that.scene,that.camera);
             // that.mesh.rotateY(0.01);
             requestAnimationFrame(render);
-            // texture.offset.x -= 0.005;
-            // if(texture.offset.x<-1){
-            //   texture.offset.x = -texture.offset.x;
-            // }
+            controls.update(); 
         }
         render();
         //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
         let controls = new THREE.OrbitControls(this.camera,this.renderer.domElement);
+        controls.enableZoom = false;
+				controls.enablePan = false;
+				controls.enableDamping = true;
+				controls.rotateSpeed = - 0.25;
         console.log(controls);
         //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
         controls.addEventListener('change', render);
